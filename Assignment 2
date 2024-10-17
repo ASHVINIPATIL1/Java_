@@ -1,0 +1,121 @@
+import java.util.*;
+class Employee{
+int id;
+String name;
+String address;
+String mail_id;
+long mob_no;
+Scanner sc=new Scanner(System.in);
+void getdata() {
+System.out.println("Enter Employee name:");
+name=sc.nextLine();
+System.out.println("Enter Employee id:");
+id=sc.nextInt();
+System.out.println("Enter Employee Address:");
+address=sc.next();
+System.out.println("Enter Employee mobile no:");
+mob_no=sc.nextLong();
+System.out.println("Enter Employee mail id:");
+mail_id=sc.next();
+}
+void display()
+{
+System.out.println("Employee name is:"+name);
+System.out.println("Employee id is:"+id);
+System.out.println("Employee address is:"+address);
+System.out.println("Employee mobile no is:"+mob_no);
+System.out.println("Employee mail_id is:"+mail_id);
+}
+}
+class Programmer extends Employee {
+double gross_sal;
+double net_sal;
+double BP;
+double DA;
+double HRA;
+double PF;
+double club_fee;
+void programmer_sal(){
+System.out.println("Enter Basic Pay of programmer:");
+double BP= sc.nextDouble();
+DA=(0.97*BP);
+HRA=(0.10*BP);
+PF=(0.12*BP);
+club_fee=(0.01*BP);
+gross_sal=(BP+HRA+DA);
+net_sal=(gross_sal-(PF+club_fee));
+System.out.println("The gross salary is:"+gross_sal);
+System.out.println("The net salary is:"+net_sal);
+}
+}
+class TeamLead extends Employee{
+double gross_sal;
+double net_sal;
+double BP;
+double DA;
+double HRA;
+double PF;
+double club_fee;
+void teamlead_sal(){
+System.out.println("Enter Basic Pay of Team Lead:");
+double BP= sc.nextDouble();
+DA=(0.97*BP);
+HRA=(0.10*BP);
+PF=(0.12*BP);
+club_fee=(0.01*BP);
+gross_sal=(BP+HRA+DA);
+net_sal=(gross_sal-(PF+club_fee));
+System.out.println("The gross salary is:"+gross_sal);
+System.out.println("The net salary is:"+net_sal);
+}
+}
+class Project_manager extends Employee{
+double gross_sal;
+double net_sal;
+double BP;
+double DA;
+double HRA;
+double PF;
+double club_fee;
+void projectmanager_sal(){
+System.out.println("Enter Basic Pay of Project manager:");
+double BP= sc.nextDouble();
+DA=(0.97*BP);
+HRA=(0.10*BP);
+PF=(0.12*BP);
+club_fee=(0.01*BP);
+gross_sal=(BP+HRA+DA);
+net_sal=(gross_sal-(PF+club_fee));
+System.out.println("The gross salary is:"+gross_sal);
+System.out.println("The net salary is:"+net_sal);
+}
+}
+class Salary1{
+public static void main (String[]args){
+int ch;
+Scanner sc=new Scanner(System.in);
+System.out.println("\n1.Programmer \n2.Team Lead \n3.Project Manager");
+System.out.println("Enter your choice:");
+ch=sc.nextInt();
+switch(ch){
+case 1:
+Programmer obj1=new Programmer();
+obj1.getdata();
+obj1.display();
+obj1.programmer_sal();
+//break;
+case 2:
+TeamLead obj2=new TeamLead();
+obj2.getdata();
+obj2.display();
+obj2.teamlead_sal();
+//break;
+case 3:
+Project_manager obj3=new Project_manager();
+obj3.getdata();
+obj3.display();
+obj3.projectmanager_sal();
+break;
+}
+}
+}
