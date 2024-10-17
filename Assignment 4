@@ -1,0 +1,50 @@
+import java.util.Scanner;
+abstract class Shape{
+double dimension1;
+double dimension2;
+public void inputDimension(double dim1,double dim2){
+this.dimension1=dim1;
+this.dimension2=dim2;
+}
+abstract double computeArea();
+}
+class Triangle extends Shape {
+ double computeArea(){
+ return 0.5 * dimension1 * dimension2 ;
+ }
+}
+class Rectangle extends Shape{
+ double computeArea(){
+ return dimension1*dimension2;
+ }
+}
+class Square extends Shape{
+ double computeArea(){
+ return dimension1*dimension1;
+ }
+}
+public class Ass_4{
+public static void main (String []args){
+Scanner sc= new Scanner(System.in);
+ System.out.println("Enter base of Triangle:");
+ double base=sc.nextDouble();
+ System.out.println("Enter height of Triangle:");
+ double height=sc.nextDouble();
+ Shape triangle=new Triangle();
+ triangle.inputDimension(base,height);
+ System.out.println("Area of Triangle:"+ triangle.computeArea());
+ System.out.println("Enter width of Rectangle:");
+ double width=sc.nextDouble();
+ System.out.println("Enter length of Rectangle:");
+ double length=sc.nextDouble();
+ Shape rectangle= new Rectangle();
+ rectangle.inputDimension(width,length);
+ System.out.println("Area of Rectangle:"+ rectangle.computeArea());
+ System.out.println("Enter side of square:");
+ double side=sc.nextDouble();
+ Shape square= new Square();
+ square.inputDimension(side,side);
+ System.out.println("Area of square:"+ square.computeArea());
+ sc.close();
+ }
+}
