@@ -3,7 +3,7 @@ class Complex_No {
  float real, img;
  public Complex_No() {
  real = 0;
- img = 0;
+ img = 0; 
  }
  public Complex_No(float a, float b) {
  real = a;
