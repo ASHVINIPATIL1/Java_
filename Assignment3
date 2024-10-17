@@ -1,0 +1,69 @@
+import java.util.Scanner;
+class Publication{
+ protected String title;
+ protected double price;
+ protected int copies;
+public Publication(String title,double price,int copies){
+ this.title=title;
+ this.price=price;
+ this.copies=copies;
+}
+public double salecopy(int noOfCopies){
+ this.copies -=noOfCopies;
+ return noOfCopies*price;
+}
+public void display(){
+ System.out.println("Title:"+title);
+ System.out.println("Price:"+price);
+ System.out.println("Copies:"+copies);
+}
+}
+class Book extends Publication{
+ private String author;
+public Book(String title,double price,int copies,String author){
+ super(title,price,copies);
+ this.author=author;
+}
+public void orderCopies(int noOfCopies){
+ this.copies +=noOfCopies;
+}
+public void display(){
+ super.display();
+ System.out.println("Author:"+author);
+ }
+}
+class Magzine extends Publication{
+ private String currentIssue;
+ public Magzine(String title,double price,int copies, String currentIssue){
+ super(title,price,copies);
+ this.currentIssue=currentIssue;
+ }
+ public void orderQty(int quantity){
+ this.copies +=quantity;
+ }
+ public void receivedIssue(String newIssue){
+ this.currentIssue=newIssue;
+ }
+ public void display(){
+ System.out.println("Current Issue:"+ currentIssue);
+ }
+}
+public class PublicationTest{
+ public static void main(String[]args){
+ Book b=new Book("OOP WITH JAVA",44.99,100,"JAMES");
+ Magzine m=new Magzine("TECHNOLOGY",5.99,500,"AUG 2024");
+ b.orderCopies(50);
+ b.display();
+ 
+ double booksale= b.salecopy(10);
+ System.out.println("Total Book Sale:"+booksale);
+ m.receivedIssue("SEPT 2024");
+ m.display();
+ 
+ double magsale=m.salecopy(100);
+ System.out.println("Total Magzine Sale:"+magsale);
+ 
+ double totalsale= booksale+magsale ;
+ System.out.println("Total Publication Sale:"+totalsale);
+ }
+}
