@@ -1,0 +1,143 @@
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+
+class TeamMember{
+    private String name;
+    private String email;
+
+    public TeamMember(String name,String email){
+        this.name=name;
+        this.email=email;
+    }
+    public String toString(){
+        return "TeamMember[name=" +name + ",email=" + email + "]";
+    }
+}
+class Task{
+    private String name;
+    private String description;
+    private TeamMember assignee;
+    private Date dueDate;
+    private String status;
+    private int priority;
+
+    public Task(String name,String description,TeamMember assignee, Date dueDate,String statu
+        this.name=name;
+        this.description=description;
+        this.assignee=assignee;
+        this.dueDate=dueDate;
+        this.status=status;
+        this.priority=priority;
+    }
+    public String toString(){
+        return "Task[name=" + name + ",status=" + status +",priority=" + priority + "]";
+    }
+}
+class Project {
+    private String name;
+    private String description;
+    private Date startDate;
+    private Date endDate;
+    private String owner;
+    private List<Task> tasks;
+
+    public Project(String name,String description,Date startDate,Date endDate,String owner){
+        this.name=name;
+        this.description=description;
+        this.startDate=startDate;
+        this.endDate=endDate;
+        this.owner=owner;
+        this.tasks= new ArrayList<>();
+
+    }
+    public void addTask(Task task){
+        tasks.add(task);
+    }
+    public List<Task> getTasks(){
+        return tasks;
+    }
+
+    public String toString() {
+        return "Project[name=" +name + ",description=" + description + "]";
+    }
+}
+public class Main{
+    public static void  main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        List<TeamMember> teamMembers = new ArrayList<>();
+
+        for(int i=1;i<=5;i++){
+            System.out.println("Enter details for Team Members" + i + ":");
+            System.out.print("Name: ");
+            String name= sc.nextLine();
+            System.out.print("Email: ");
+            String email= sc.nextLine();
+            teamMembers.add(new TeamMember(name, email));
+        }
+        Project project = null;
+
+        try {
+            System.out.println("Enter details for Project:");
+            System.out.print("Name: ");
+            String projectName = sc.nextLine();
+            System.out.print("Description: ");
+            String projectDescription =sc.nextLine();
+            System.out.print("Start Date(yyyy-mm-dd): ");
+            Date startDate = java.sql.Date.valueOf(sc.nextLine());
+            System.out.print("End Date(yyyy-mm-dd): ");
+            Date endDate = java.sql.Date.valueOf(sc.nextLine());
+            System.out.print("Owner: ");
+            String projectOwner = sc.nextLine();
+            project = new Project (projectName, projectDescription, startDate, endDate, proje
+        }
+        catch(Exception e){
+            System.out.println("Error occured while creating the project: " + e.getMessage())
+        }
+
+        for(int i=1;i<=5;i++){
+            if(project ==null){
+                System.out.println("Project is null.Please create project file first.");
+                break;
+            }
+            try{
+                System.out.println("Enter details for Task " + i + ":");
+                System.out.print("Name: ");
+                String taskName = sc.nextLine();
+                System.out.print("Description: ");
+                String taskDescription = sc.nextLine();
+                System.out.print("Assignee(1-5 for Team Member 1-5); ");
+                int assigneeIndex= sc.nextInt() - 1;
+
+                if(assigneeIndex <0 || assigneeIndex >= teamMembers.size()){
+                    throw new IndexOutOfBoundsException("Assignee index out of bounds. ");  
+                }
+                TeamMember assignee = teamMembers.get(assigneeIndex);
+                sc.nextLine();
+                System.out.print("Due Date (yyyy-mm-dd): ");
+                Date taskDueDate = java.sql.Date.valueOf(sc.nextLine());
+                System.out.print("Status: ");
+                String taskStatus = sc.nextLine();
+                System.out.print("Priority: ");
+                int taskPriority = sc.nextInt();
+                sc.nextLine();           
+                Task task = new Task(taskName, taskDescription, assignee, taskDueDate , taskS
+                project.addTask(task);
+            }
+            catch(Exception e){
+                System.out.println("Error occured while adding task: " + e.getMessage());
+            }
+        }
+
+        if(project !=null){
+            System.out.println("\nProject Details:");
+            System.out.println(project);
+            System.out.println("\nTasks:");
+            for(Task task : project.getTasks()){
+                System.out.println(task);
+            }
+        }
+        sc.close();
+    }
+}
