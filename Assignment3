@@ -66,4 +66,4 @@ public class PublicationTest{
  double totalsale= booksale+magsale ;
  System.out.println("Total Publication Sale:"+totalsale);
  }
-}
+} 
